@@ -1,0 +1,65 @@
+<odoo>
+    <data>
+    <record id="school_security" model="ir.module.category">
+        <field name="name">School Category</field>
+        <field name="description">this module holds category</field>
+    </record>
+
+    <record id="school_student_group" model="res.groups">
+        <field name="name" >Student </field>
+        <field name="comment">this grp has student user permissions</field>
+        <field name="category_id" ref="school_security"></field>
+    </record>
+
+    <record id="school_teacher_group" model="res.groups">
+        <field name="name" >Teacher </field>
+        <field name="comment">this grp has teacher user permissions</field>
+        <field name="category_id" ref="school_security"></field>
+        <field name="implied_ids" eval="[(4, ref('school_module.school_student_group'))]"/>
+
+    </record>
+
+    <record id="school_principal_group" model="res.groups">
+        <field name="name" >Principal </field>
+        <field name="comment">this grp has principal user permissions</field>
+        <field name="category_id" ref="school_security"></field>
+        <field name="implied_ids" eval="[(4, ref('school_module.school_teacher_group'))]"/>
+    </record>
+
+
+    <!-- <record id="school_student_user_rule" model="ir.rule">
+        <field name="name">Student User Rule</field>
+        <field name="model_id" ref="model_school_model"/>
+        <field name="domain_force">[("partner_id", "=", user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('school_student_group'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record> -->
+
+    <!-- <record id="school_teacher_user_rule" model="ir.rule">
+        <field name="name">Teacher User Rule</field>
+        <field name="model_id" ref="model_school_model"/>
+        <field name="domain_force">[("partner_id", "=", user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('school_teacher_group'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="school_principal_user_rule" model="ir.rule">
+        <field name="name">Principal User Rule</field>
+        <field name="model_id" ref="model_school_model"/>
+        <field name="domain_force">[("partner_id", "=", user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('school_Principal_group'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record> -->
+
+   
+</data>
+</odoo>

@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <record id="estate_security" model="ir.module.category">
+            <field name="name">Estate Category</field>
+            <field name="description">this module holds category</field>
+        </record>
+
+        <record id="estate_user_group" model="res.groups">
+            <field name="name" >Estate user</field>
+            <field name="comment">this grp has user permissions</field>
+            <field name="category_id" ref="estate_security"></field>
+        </record>
+
+        <record id="estate_admin_grp" model="res.groups">
+            <field name="name">Estate administrator</field>
+            <field name="comment">this grp has all permission</field>
+            <field name="category_id" ref="estate_security"></field>
+            <field name="implied_ids" eval="[(4, ref('estate_module.estate_user_group'))]"/>
+        </record>
+
+        <record id="estate_model_user_rule" model="ir.rule">
+            <field name="name">Estate User Rule</field>
+            <field name="model_id" ref="model_estate_model"/>
+            <field name="domain_force">[("partner_id", "=", user.partner_id.id)]</field>
+            <field name="groups" eval="[(4, ref('estate_user_group'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="estate_model_admin_rule" model="ir.rule">
+            <field name="name">Estate Admin Rule</field>
+            <field name="model_id" ref="model_estate_model"/>
+            <field name="domain_force">[(1, "=", 1)]</field>
+            <field name="groups" eval="[(4, ref('estate_admin_grp'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+
+    </data>
+</odoo> 

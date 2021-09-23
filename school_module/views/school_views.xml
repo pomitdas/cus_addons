@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="School_student_fee_tree_view" model="ir.ui.view">
+            <field name="name">school.fee.tree.view</field>
+            <field name="model">school.fee</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="student_id" />
+                    <field name="total_fee" />
+                    <!-- <field name="amount_paid" /> -->
+                    <field name="due_fee" />
+                    <field name="date_paid" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="school_student_fee_form_view" model="ir.ui.view">
+            <field name="name">school.fee.form.view</field>
+            <field name="model">school.fee</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="pop_up" string="Register Payment" type="object" class="btn btn-warning" />
+
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="student_id" />
+                            <field name="course_id" />
+                            <field name="total_fee" />
+                            <!-- <field name="amount_paid" /> -->
+                            <field name="amount_pai" />
+
+                        </group>
+                        <group>
+                            <field name="due_fee" />
+                            <field name="date_paid" />
+                            <!-- <field name="student_fee" /> -->
+                        </group>
+                        <notebook>
+                            <page string="Student fee line">
+
+                                <field name="amount_ids">
+
+                                    <tree>
+
+                                        <field name="payment_seq_id" />
+                                        <field name="curr_payment" />
+
+                                        <!-- <field name="amount_paid" /> -->
+                                        <field name="date_paid" />
+                                    </tree>
+                                </field>
+
+                            </page>
+                        </notebook>
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="School_course_tree_view" model="ir.ui.view">
+            <field name="name">school.course.tree.view</field>
+            <field name="model">school.course</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="duration" />
+                    <field name="department" />
+                    <field name="fee" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="school_course_form_view" model="ir.ui.view">
+            <field name="name">school.course.form.view</field>
+            <field name="model">school.course</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <label for="duration" />
+                            <div style="display:flex">
+                                <field name="duration" />
+                                <field name="time" style="margin-left:1rem;" />
+                            </div>
+                        </group>
+                        <group>
+                            <field name="department" />
+                            <field name="fee" />
+                        </group>
+
+                        <notebook>
+
+                            <page string="Teacher">
+                                <field name="teac_id" mode="kanban">
+                                    <kanban>
+                                        <field name="image" />
+                                        <field name="tec_name" />
+                                        <field name="email" />
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                                    <t t-set="placeholder" t-value="'/base/static/img/company_image.png'" />
+                                                    <div class="o_kanban_image_fill_left o_kanban_image_full" t-attf-style="background-image: url(#{kanban_image('school.teacher', 'image')})" role="img" />
+                                                    <div class="oe_kanban_details">
+                                                        <field name="tec_name" />
+                                                        <div>
+                                                            <field name="email" widget="email" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                            <page string="Student">
+                                <group>
+                                    <!-- <field name="student_ids" /> -->
+
+                                    <field name="student_ids" mode="kanban">
+                                        <kanban>
+                                            <field name="image" />
+                                            <field name="stu_name" />
+                                            <field name="email" />
+                                            <templates>
+                                                <t t-name="kanban-box">
+                                                    <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                                        <t t-set="placeholder" t-value="'/base/static/img/company_image.png'" />
+                                                        <div class="o_kanban_image_fill_left o_kanban_image_full" t-attf-style="background-image: url(#{kanban_image('school.model', 'image')})" role="img" />
+                                                        <div class="oe_kanban_details">
+                                                            <field name="stu_name" />
+                                                            <div>
+                                                                <field name="email" widget="email" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </templates>
+                                        </kanban>
+                                    </field>
+
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="school_teacher_kanban_view" model="ir.ui.view">
+            <field name="name">school.teacher.kanban.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="image" />
+                    <field name="tec_name" />
+                    <field name="city" />
+                    <field name="country_id" />
+                    <field name="email" />
+                    <field name="id" />
+                    <field name="date_of_birth" />
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <t t-set="placeholder" t-value="'/base/static/img/company_image.png'" />
+                                <div class="o_kanban_image_fill_left o_kanban_image_full" t-attf-style="background-image: url(#{kanban_image('school.teacher', 'image', record.id.raw_value, placeholder)})" role="img" />
+                                <div class="oe_kanban_details">
+                                    <ul>
+                                        <li>
+                                            <strong class="o_kanban_record_title oe_partner_heading"><field name="tec_name"/></strong>
+
+                                        </li>
+                                        <li>
+                                            <field name="email" />
+                                        </li>
+                                        <li>
+                                            <field name="date_of_birth" />
+                                        </li>
+                                        <li>
+                                            <field name="city" />
+                                        </li>
+                                        <li>
+                                            <field name="country_id" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="school_teacher_form_view" model="ir.ui.view">
+            <field name="name">school.teacher.form.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="name" />
+                            <div class="oe_edit_only">
+                                <h6>Name</h6>
+                            </div>
+                            <group>
+                            <h1>
+                                <field name="tec_name" />
+                            </h1>
+
+                            <div>
+                                <field name='image' widget="image" class="oe_avatar" />
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+
+                                <field name="date_of_birth" />
+                                <field name="age" />
+                                <field name="gender" />
+                                <field name="email" />
+                                <field name="active" />
+                                <field name="phone" />
+
+                            </group>
+                            <group>
+                                <h4>Address</h4>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street" />
+                                    <field name="city" placeholder="City" class="o_address_city" />
+                                    <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip_code}" />
+                                    <field name="zip_code" placeholder="ZIP" class="o_address_zip" />
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                </div>
+
+
+                                <field name="courses_id" widget="many2many_tags" />
+                                <field name="department" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="School_teacher_tree_view" model="ir.ui.view">
+            <field name="name">school.teacher.tree.view</field>
+            <field name="model">school.teacher</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="tec_name" />
+                    <!-- <field name="designation" /> -->
+                    <field name="department" />
+                    <field name="state_id" />
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="school_model_kanban_view" model="ir.ui.view">
+            <field name="name">school.model.kanban.view</field>
+            <field name="model">school.model</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="image" widget="image" class="oe_avatar" />
+                    <field name="stu_name" />
+                    <field name="city" />
+                    <field name="country_id" />
+                    <field name="email" />
+                    <field name="id" />
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <t t-set="placeholder" t-value="'/base/static/img/company_image.png'" />
+                                <div class="o_kanban_image_fill_left o_kanban_image_full" t-attf-style="background-image: url(#{kanban_image('school.model', 'image', record.id.raw_value, placeholder)})" role="img" />
+                                <div class="oe_kanban_details">
+                                    <ul>
+                                        <strong class="o_kanban_record_title oe_partner_heading"><field name="stu_name"/></strong>
+                                       <li> <field name="date_of_birth" /></li>
+                                        <li>
+                                            <field name="city" />
+                                        </li>
+                                        <!-- <li><field name="country_id"/></li> -->
+                                        <li>
+                                            <field name="email" />
+                                        </li>
+                                        <!-- <li> <field name="phone" /></li>  -->
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- <group>
+            <field name="image" widget="image" class="oe_avatar" />
+        </group>
+        <group>
+            <h1>
+                Age:
+                <field name="stu_name" />
+            </h1>
+            <h1>
+                City:
+                <field name="city" />
+            </h1>
+            <field name="country_id" />
+        </group> -->
+
+
+
+
+
+        <record id="school_model_form_view" model="ir.ui.view">
+            <field name="name">school.model.form.view</field>
+            <field name="model">school.model</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="change_new2_curr" string="Enroll" class="btn-danger" type="object" states="new" />
+                        <button name="change_cur2_passout" string="Pass Out" type="object" class="btn btn-warning" states="current" />
+                        <button name="action_confirm" string="Confirm" type="object" />
+                        <field name="state" widget='statusbar' />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                        
+                        <field name="name" />
+
+                        <div class="oe_edit_only">
+                            <h6>Name</h6>
+                        </div>
+                        <group>
+                            <h1>
+                                <field name="stu_name" />
+                            </h1>
+
+                            <h1>
+                               
+                                <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;}"/>
+                                <!-- <field name='image' widget="image" class="oe_avatar" /> -->
+                            </h1>
+
+                        </group>
+                        <group>
+                            <group>
+                                <!-- <field name="state" /> -->
+                                <field name="date_of_birth" />
+                                <field name="age" />
+                                <field name="gender" />
+                                <field name="active" />
+                                <field name="email" widget="email" />
+                                <field name="subject_ids" widget="many2many_tags" />
+                                <field name="course_ids" widget="many2many_tags" />
+                            </group>
+                            <group>
+                                <label for ="street" />
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street" />
+                                    <field name="city" placeholder="City" class="o_address_city" />
+                                    <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" />
+                                    <field name="zip_code" placeholder="ZIP" class="o_address_zip" />
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                </div>
+                                <field name="phone" widget="phone" />
+                                <field name="registration_number" placeholder="e.g. BE0477472701" />
+                                <field name="date_registration" widget="date_registration" />
+
+                            </group>
+                            <notebook>
+                                <page string="Contact and Address">
+                                    <group>
+                                        <field name="phone" />
+                                        <label for ="street" />
+                                        <div class="o_address_format">
+                                            <field name="street" placeholder="Street..." class="o_address_street" />
+                                            <field name="city" placeholder="City" class="o_address_city" />
+                                            <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip_code}" />
+                                            <field name="zip_code" placeholder="ZIP" class="o_address_zip" />
+                                            <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                        </div>
+                                        <!-- <field name="note" /> -->
+                                    </group>
+                                </page>
+                                <page string="Student">
+                                    <fields name="state" />
+                                </page>
+
+                            </notebook>
+
+
+                        </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="school_model_smart_button" model="ir.ui.view">
+            <field name="name">school.model.buttons.view</field>
+            <field name="model">school.model</field>
+            <field name="inherit_id" ref="school_module.school_model_form_view" />
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="stu_name"
+                        icon="fa-star">
+                        <field string="Phone" name="phone" widget="statinfo"/>
+                    </button>
+                </div>
+            </field>
+        </record>
+
+
+        <record id="School_model_tree_view" model="ir.ui.view">
+            <field name="name">school.model.tree.view</field>
+            <field name="model">school.model</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="stu_name" />
+                    <field name="age" />
+                    <field name="city" />
+                    <field name="state_id" />
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- <record id="School_fee_line_tree_view" model="ir.ui.view">
+            <field name="name">school.fee.line.tree.view</field>
+            <field name="model">school.fee.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="curr_payment" /> -->
+        <!-- <field name="amount_paid" /> -->
+        <!-- <field name="date_paid" /> -->
+        <!-- <field name="student_name" /> -->
+        <!-- <field name="school_fee_id" /> -->
+        <!-- </tree>
+            </field>
+        </record> -->
+
+
+        <record id="action_school_model" model="ir.actions.act_window">
+            <field name="name">School Student</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.model</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <record id="action_school_teacher" model="ir.actions.act_window">
+            <field name="name">School Teacher</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.teacher</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <record id="action_school_course" model="ir.actions.act_window">
+            <field name="name">School Course</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.course</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_school_student_fee" model="ir.actions.act_window">
+            <field name="name">School Student Fee</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.fee</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="action_school_student_line_fee" model="ir.actions.act_window">
+            <field name="name">School Student Fee Line</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.fee.line</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="school_model_menu" name="School " />
+        <menuitem id="school_model_student_menu" parent="school_model_menu" action="action_school_model" name="Student" />
+        <menuitem id="school_model_teacher_menu" parent="school_model_menu" action="action_school_teacher" name="Teacher" />
+        <menuitem id="school_model_course_menu" parent="school_model_menu" action="action_school_course" name="Course" />
+        <menuitem id="school_model_student_fee_menu" parent="school_model_menu" action="action_school_student_fee" name="Student Fee" />
+        <!-- <menuitem id="school_model_student_fee_line_menu" parent="school_model_menu" action="action_school_student_line_fee" name="Student Line Fee" /> -->
+
+        <!-- Sequences for student -->
+        <record id="stduent_sequence" model="ir.sequence">
+            <field name="name">Student Sequence</field>
+            <field name="code">student.sequence</field>
+            <field name="prefix">STD/%(year)s/</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="payment_sequence" model="ir.sequence">
+            <field name="name">Payment Sequence</field>
+            <field name="code">payment.sequence</field>
+            <field name="prefix">Pay/%(year)s/</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="teacher_sequence" model="ir.sequence">
+            <field name="name">teacher Sequence</field>
+            <field name="code">teacher.sequence</field>
+            <field name="prefix">tea/%(year)s/</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+</odoo>

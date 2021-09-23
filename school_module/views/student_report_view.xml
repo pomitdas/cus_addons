@@ -1,0 +1,234 @@
+<odoo>
+    <data>
+        <record id="student_report" model="ir.actions.report">
+            <field name="name">Student Report</field>
+            <field name="model">school.model</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">school_module.student_report_template</field>
+            <field name="report_file">school_module.student_report_template</field>
+            <field name="print_report_name">"Student Report %s" %(object.name)</field>
+            <field name="binding_type">report</field>
+            <field name="binding_model_id" ref="model_school_model" />
+        </record>
+
+        <record id="teacher_report" model="ir.actions.report">
+            <field name="name">Teacher Report</field>
+            <field name="model">school.teacher</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">school_module.teacher_report_template</field>
+            <field name="report_file">school_module.teacher_report_template</field>
+            <field name="print_report_name">"Teacher Report %s" %(object.name)</field>
+            <field name="binding_type">report</field>
+            <field name="binding_model_id" ref="model_school_teacher" />
+        </record>
+
+        <record id="fee_report" model="ir.actions.report">
+            <field name="name">Payment Report</field>
+            <field name="model">school.fee</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">school_module.fee_report_template</field>
+            <field name="report_file">school_module.fee_report_template</field>
+            <field name="print_report_name">"Fee Report %s" %(object.name)</field>
+            <field name="binding_type">report</field>
+            <field name="binding_model_id" ref="model_school_fee" />
+        </record>
+
+        <template id="fee_report_template" name="Fee Report Template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <style>
+                            .page{
+                                border:2px solid red;
+                                width:30%;
+                                   height:305px;
+
+
+                            }
+                            .head{ background-color:green;
+                                   border:2px solid red;
+                                   
+                                }
+                            p{
+                                padding:0px 10px;
+                                text-align:center;
+                            }
+                            </style>
+                        <div class="page">
+                            <!-- <t t-set="abcd" t-value="o.returndata()" />
+                            <t t-esc="abcd" /> -->
+                            <div class="head">
+                                <h1>Fee Report</h1>
+                            </div>
+
+                            <div style="display: flex; display: -webkit-box; -webkit-box-pack: center; justify-content: center;">
+                                <div style="border: 1px solid #ccc; flex: 1; -webkit-box-flex: 1; -webkit-flex: 1;color:red;text-align:center;">
+                                    <p> Name :</p>
+                                    <p> Course :</p>
+                                    <p> Total Fee : </p>
+                                    <p>Payment :</p>
+                                    <p>------------</p>
+                                    <p>Due :</p>
+                                </div>
+                                <div style="border: .1px solid #ccc; flex: 1; -webkit-box-flex: 1; -webkit-flex: 1; margin-right: 0;background-color:red;color:white;">
+                                    <p> <span t-field="o.student_id" style="color:orange" /></p>
+                                    <p> <span t-field="o.course_id" /></p>
+                                    <p><span t-field="o.total_fee" /></p>
+                                    <p><span t-field="o.amount_pai" /></p>
+                                    <p>------------</p>
+                                    <p> <span t-field="o.due_fee" /></p>
+
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+        <template id="student_report_template" name="Student Report Template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <style>
+                            .page{
+                                width:70%;
+                                border:2px solid red; 
+                                border-radius: 5px;                  
+                            }
+                           h5{text-align:center;
+                            background-color:yellow
+
+                           }
+                           .size_change{
+                            width:200px;
+                             height:200px;
+                           }
+                          .fooot{
+                            <!-- border:2px solid red; -->
+                            background-color:red;
+                            <!-- color:red; -->
+                            }
+                        </style>
+
+
+                        <div class="page">
+                            <!-- <div>
+                                <p t-if="user.birthday == today()">Happy birthday!</p>
+                                <p t-elif="user.login == 'root'">Welcome master!</p>
+                                <p t-else="">Welcome!</p>
+                            </div> -->
+                            <!-- <t t-foreach="[1, 2, 3]" t-as="i">
+                                <p><t t-esc="i"/></p>
+                            </t> -->
+
+                                <div style="display: flex; display: -webkit-box; -webkit-box-pack: center; justify-content: center;">
+                                    <div style="border: 1px solid #ccc; flex: 1; -webkit-box-flex: 1; -webkit-flex: 1;color:red;text-align:center;">
+                                        <p> Galgotias University</p>
+
+                                    </div>
+                                    <div style="border: 1px solid #ccc; flex: 1; -webkit-box-flex: 1; -webkit-flex: 1; margin-right: 0;background-color:red;color:white;">
+                                        <p> Plot No.2 Sector 17A Yamuna Expressway Greater Noida Gautam Budh Nagar
+                                        </p>
+
+                                    </div>
+                                </div>
+                            <h5>STUDENT IDENTITY CARD</h5>
+
+                            <div style="display: flex; display: -webkit-box; -webkit-box-pack: center; justify-content: center;">
+                                <div style="border: 1px solid #ccc; flex: 1; -webkit-box-flex: 1; -webkit-flex: 1;">
+                                    <!-- <p>Lrem</p>
+                                    <p>Ipsum</p> -->
+                                    <p class="size_change">  <span align="right" t-field="o.image" t-options='{"widget": "image"}' /></p>
+                                </div>
+                                <div style="border: 1px solid #ccc; flex: 1; -webkit-box-flex: 1; -webkit-flex: 1; margin-right: 0;">
+                                    <p t-field="o.stu_name"></p>
+                                    <p>B. Tech 2017-2018</p>
+                                    <p>B. Tech/B. Tech(Hons) Computer Science</p>
+                                    <p t-field="o.registration_number"></p>
+                                </div>
+                            </div>
+
+                            <div class="fooot"> University contact No. 0120-4370000</div>
+
+
+                            <!-- <div class="col-xs-12"><center>
+
+                                <img t-if="o.image" t-att-src="'data:image/png;base64,%s' % o.image" style="max-height: 120px;max-width: 100px;"/></center>
+                                
+                                </div> -->
+
+                            <!-- <img t-attf-src="'data:image/*;base64,{{o.image}}'" /> -->
+                            <!-- <div class="size_change">
+                                <span align="right" t-field="o.image" t-options='{"widget": "image"}' />
+
+                            </div> -->
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+        <template id="teacher_report_template" name="teacher Report Template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+
+                        <style>
+                    .teacher{
+                        height: 100%;
+                        width: 70%;
+                        background-color: powderblue;
+                        border:1px solid red;
+                        
+                    }
+                   
+                     h5{text-align:center;
+                         background-color:yellow;
+                   }
+                   
+                </style>
+
+                        <div class="teacher">
+                            <div style="display: flex; display: -webkit-box; -webkit-box-pack: center; justify-content: center;">
+                                <div style="border: 1px solid #ccc; flex: 1; -webkit-box-flex: 1; -webkit-flex: 1;">
+                                    <p> Galgotias University</p>
+
+                                </div>
+                                <div style="border: 1px solid #ccc; flex: 1; -webkit-box-flex: 1; -webkit-flex: 1; margin-right: 0;">
+                                    <p> Plot No.2 Sector 17A Yamuna Expressway Greater Noida Gautam Budh Nagar
+                                </p>
+
+                                </div>
+                            </div>
+                            <h5>Teacher IDENTITY CARD</h5>
+
+                            <!-- <t t-set="abcd" t-value="o.returndata()" />
+                    <t t-esc="abcd" /> -->
+
+                            <div style="display: flex; display: -webkit-box; -webkit-box-pack: center; justify-content: center;">
+                                <div style="border: 1px solid #ccc; flex: 1; -webkit-box-flex: 1; -webkit-flex: 1;">
+                                    <p>Lorem</p>
+                                    <p>Ipsum</p>
+                                    <p>Dolor</p>
+                                </div>
+                                <div style="border: 1px solid #ccc; flex: 1; -webkit-box-flex: 1; -webkit-flex: 1; margin-right: 0;">
+                                    <p t-field="o.tec_name"></p>
+                                    <p t-field="o.gender"></p>
+                                    <p t-field="o.email"></p>
+                                    <p t-field="o.courses_id"></p>
+                                </div>
+                            </div>
+                            <div class="fooot"> University contact No. 0120-4370000</div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

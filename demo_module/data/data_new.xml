@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- <data>
+        <record id="demo_new_auto_record" model="demo.model">
+            <field name="name1">pomit</field>
+            <field name="description">i am from bihar</field>
+        </record>
+    </data> -->
+</odoo>

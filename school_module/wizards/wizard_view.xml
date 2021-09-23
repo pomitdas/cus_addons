@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fee_wizard_form_view" model="ir.ui.view">
+            <field name="name">fee.wizard.form.view</field>
+            <field name="model">fee.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>                       
+                        <field name="curr_payment"/>
+                        <field name="Date" />
+                    </group>
+                    <footer>
+                        <button name="payment_record" string="Submit" type="object" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_fee_wizard" model="ir.actions.act_window">
+            <field name="name">Student Fee</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fee.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
