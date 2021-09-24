@@ -45,9 +45,12 @@ class SchoolModel(models.Model):
 
     # student_id=fields.Many2one("school.course",string="student_id")
 
+    def email_fun(self):
+        tempale_id= self.env.ref("school_module.email_template").id
+
     @api.onchange("country_id")
     def _onchange_country_id(self):
-        _logger.info("---------_onchange_country_id--------------")
+        # _logger.info("---------_onchange_country_id--------------")
         if self.country_id:
             return {
                 "domain": {"state_id": [("country_id", "=", self.country_id.id)]}

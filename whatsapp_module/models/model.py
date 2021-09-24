@@ -16,6 +16,13 @@ class WhatsappModel(models.Model):
     state_id=fields.Many2one("res.country.state",string="State", domain="[('country_id', '=',country_id )]")
     country_id=fields.Many2one("res.country",string="Country")
     email=fields.Char(string="Email")
+    pro=fields.Many2one( "res.users",string="Pro")
+
+    def send_email_fun(self):
+        template_id=self.env.ref("whatsapp_module.email_template_for").id
+        template = self.env['mail.template'].browse(template_id)
+        template.send_mail(self.id,force_send=True)
+        
     
 
 

@@ -18,9 +18,11 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <button name="send_email_fun" type="object" string="Send Email" />
                     <group>
                         <group>
                             <field name="name" />
+                            <field name="pro" />
                             <label for="street" />
                             <div class="o_address_format">
                                 <field name="street" placeholder="Street..." class="o_address_street" />
@@ -34,7 +36,7 @@
                         <group>
                             <field name="date_of_birth" />
                             <field name="age" />
-                            <field name="Mobile" widget="whatsapp" />
+                            <field name="Mobile" widget="phone" />
                             <field name="email" widget="email" />
                         </group>
                     </group>
@@ -52,5 +54,5 @@
 
         <menuitem id="whatsapp_model_menu" name="Whatsapp" />
         <menuitem id="whatsapp_model_contact_menu" parent="whatsapp_model_menu" action="action_whatsapp_model" name="Contact" />
-    </data>
+    </data>   
 </odoo>
