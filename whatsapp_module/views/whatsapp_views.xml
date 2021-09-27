@@ -17,8 +17,10 @@
             <field name="model">contact.model</field>
             <field name="arch" type="xml">
                 <form>
+                    <button name="pop_up" type="object" string="Whatsapp " />
+                    <button name="send_email_fun" type="object" string="Send Email" />
                     <sheet>
-                        <button name="send_email_fun" type="object" string="Send Email" />
+                       
                     <group>
                         <group>
                             <field name="name" />

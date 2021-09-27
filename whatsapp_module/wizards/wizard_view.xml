@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="whatsapp_wizard_form_view" model="ir.ui.view">
+            <field name="name">whatsapp.wizard.form.view</field>
+            <field name="model">whatsapp.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>                       
+                        <field name="phone_no"/>
+                        <field name="text" />
+                    </group>
+                    <footer>
+                        <button name="send_msg" string="Send " type="object" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_whatsapp_wizard" model="ir.actions.act_window">
+            <field name="name">Whatsapp</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">whatsapp.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
