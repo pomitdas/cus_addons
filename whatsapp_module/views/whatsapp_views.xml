@@ -1,5 +1,20 @@
 <odoo>
     <data>
+        <record id="whatsapp_menu_form_view" model="ir.ui.view">
+            <field name="name">whatsapp.menu.form.view</field>
+            <field name="model">whatsapp.menu</field>
+            <field name="arch" type="xml">
+                <form>
+                    <button name="send_whatsapp_message" type="object" string="Send Whatsapp Message " class="btn btn-success" />
+
+                    <sheet>
+                        <field name="name"/>
+                    
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
         <record id="Contact_tree_view" model="ir.ui.view">
             <field name="name">Contact.tree.view</field>
             <field name="model">contact.model</field>
@@ -17,35 +32,56 @@
             <field name="model">contact.model</field>
             <field name="arch" type="xml">
                 <form>
-                    <button name="pop_up" type="object" string="Whatsapp " />
+                    <button name="pop_up" type="object" string="Whatsapp " class="btn btn-success" />
                     <button name="send_email_fun" type="object" string="Send Email" />
                     <sheet>
-                       
-                    <group>
-                        <group>
-                            <field name="name" />
-                            <field name="pro" />
-                            <label for="street" />
-                            <div class="o_address_format">
-                                <field name="street" placeholder="Street..." class="o_address_street" />
-                                <field name="city" placeholder="City" class="o_address_city" />
-                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip_code}" />
-                                <field name="zip_code" placeholder="ZIP" class="o_address_zip" />
-                                <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
-                            </div>
-                        </group>
                         
-                        <group>
-                            <field name="date_of_birth" />
-                            <field name="age" />
-                            <field name="Mobile" widget="phone" />
-                            <field name="email" widget="email" />
+                            <div>
+                                <div class="oe_edit_only">
+                                    <h6>Name</h6>
+                                </div>
+                                <group>
+                                <h1>
+                                    <field name="name" />
+                                </h1>
+                                <h1>
+                                    <field name='image' widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;}" />
+                                </h1>
+
+                                </group>
+                            </div>
+                            <group>
+                            <group>
+                        
+                                <label for="street" />
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street" />
+                                    <field name="city" placeholder="City" class="o_address_city" />
+                                    <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip_code}" />
+                                    <field name="zip_code" placeholder="ZIP" class="o_address_zip" />
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                </div>
+                            </group>
+
+                            <group>
+                                <field name="date_of_birth" />
+                                <field name="age" />
+                                <field name="Mobile" widget="phone" />
+                                <field name="email" widget="email" />
+                            </group>
                         </group>
-                    </group>
                     </sheet>
                 </form>
             </field>
         </record>
+
+        <record id="action_whatsapp_menu_model" model="ir.actions.act_window">
+            <field name="name">Whatsapp message menu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">whatsapp.menu</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
 
         <record id="action_whatsapp_model" model="ir.actions.act_window">
             <field name="name">Whatsapp Contacts</field>
@@ -56,5 +92,7 @@
 
         <menuitem id="whatsapp_model_menu" name="Whatsapp" />
         <menuitem id="whatsapp_model_contact_menu" parent="whatsapp_model_menu" action="action_whatsapp_model" name="Contact" />
-    </data>   
+        <menuitem id="whatsapp_menu_model" parent="whatsapp_model_menu" action="action_whatsapp_menu_model" name="Send Whatsapp Message" />
+
+    </data>
 </odoo>

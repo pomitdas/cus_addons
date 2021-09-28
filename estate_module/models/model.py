@@ -12,7 +12,7 @@ class EstateModel(models.Model):
 
     @api.model
     def _default_partner_id(self):
-        _logger.info("--------%r------", self)
+        # _logger.info("--------%r------", self)
         return self.env.user.partner_id.id
 
    
@@ -72,19 +72,19 @@ class EstateModel(models.Model):
         # _logger.info("------%r-------------------------------",lst)
 
         if self.ids:
-            _logger.info("------%r---------------------------",self.ids)
+            # _logger.info("------%r---------------------------",self.ids)
 
             if self.title:
-                _logger.info("------%r---------------------------",self.title)
+                # _logger.info("------%r---------------------------",self.title)
                 self.postcode=123321
                 self.PRICE=878787878787
 
 
     def action_negotiate():
         if self.ids:
-            _logger.info("------%r---------------------------",self.ids)
+            # _logger.info("------%r---------------------------",self.ids)
             if self:
-                _logger.info("------%r---------------------------",self.ids.title)
+                # _logger.info("------%r---------------------------",self.ids.title)
                 self.postcode=988888
 
 
@@ -98,9 +98,9 @@ class EstateModel(models.Model):
     def set_to_refused(self): 
         for rec in self:
             if rec.offers_ids:
-                _logger.info("-----------------------------------------------%r-------------",rec.offers_ids)
+                # _logger.info("-----------------------------------------------%r-------------",rec.offers_ids)
                 non_refused_offers = rec.offers_ids.filtered(lambda x:x.status != "refused")
-                _logger.info("-----------------------------------------------%r-------------",non_refused_offers)
+                # _logger.info("-----------------------------------------------%r-------------",non_refused_offers)
                 if non_refused_offers:
                     non_refused_offers.write({
                         "status":"refused"
@@ -199,7 +199,7 @@ class EstateModel(models.Model):
 
     @api.model
     def create(self, vals):
-        _logger.info("------------------create-------%r----%r---", self, vals)
+        # _logger.info("------------------create-------%r----%r---", self, vals)
         if not vals.get("Description", False):
             vals.update({"Description": "Testing....."})
         return super(EstateModel, self).create(vals)

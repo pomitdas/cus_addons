@@ -5,12 +5,32 @@
             <field name="model">whatsapp.wizard</field>
             <field name="arch" type="xml">
                 <form>
-                    <group>                       
-                        <field name="phone_no"/>
+                    <group> 
+                        <field name="name_id"/>  
+                        <field name="mob"/>
+                    
+                        <!-- <field name="phone_no"/> -->
                         <field name="text" />
+                               
                     </group>
                     <footer>
                         <button name="send_msg" string="Send " type="object" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="whatsapp_menu_wizard_form_view" model="ir.ui.view">
+            <field name="name">whatsapp.menu.wizard.form.view</field>
+            <field name="model">whatsapp.menu.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group> 
+                          <field name="recipients" widget='many2many_tags' style="color:yellow"/>
+                          <field name="message"/>     
+                    </group>
+                    <footer>
+                        <button name="send_whatsapp_msg" string="Send Message " type="object" />
                     </footer>
                 </form>
             </field>
@@ -20,6 +40,14 @@
             <field name="name">Whatsapp</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">whatsapp.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_whatsapp_menu_wizard" model="ir.actions.act_window">
+            <field name="name">Whatsapp Menu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">whatsapp.menu.wizard</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>

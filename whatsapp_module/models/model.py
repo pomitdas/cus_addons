@@ -22,13 +22,14 @@ class WhatsappModel(models.Model):
     country_id=fields.Many2one("res.country",string="Country")
     email=fields.Char(string="Email")
     pro=fields.Many2one( "res.users",string="Pro")
-
+    image=fields.Binary(string="Image")
     def send_email_fun(self):
         template_id=self.env.ref("whatsapp_module.email_template_for").id
         template = self.env['mail.template'].browse(template_id)
         template.send_mail(self.id,force_send=True)
 
     def pop_up(self):
+      
         return {
             'name':_("Whatsapp"),
             'view_mode': 'form',
@@ -37,7 +38,7 @@ class WhatsappModel(models.Model):
             'target': 'new',
         }
         
-    # def (self):
+    # def send_fun(self):
     #     API_KEY = "g6rzwz1gxbrrecwi"
     #     URL = 'https://api.chat-api.com/instance341392/sendMessage?token=' + API_KEY
     #     response_post = requests.post(
@@ -50,9 +51,30 @@ class WhatsappModel(models.Model):
     #     )
     #     _logger.info("---response_post.text-------------%r-------------","response_post.text")
 
-    #     # print(response_post.text)
+        # print(response_post.text)
     
-    
+class WhatsappModel(models.Model):
+    _name = "whatsapp.menu"
+    _description="whatsapp menu model"
+    _rec_name = "name"
+
+    name=fields.Char(string='Name')
+
+    def send_whatsapp_message_(self):
+        pass
+
+    def send_whatsapp_message(self):
+      
+        return {
+            'name':_("Whatsapp"),
+            'view_mode': 'form',
+            'res_model': 'whatsapp.menu.wizard',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+        }
+
+
+
         
     
     
